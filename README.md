@@ -11,11 +11,13 @@
 [![Next.js](https://img.shields.io/badge/Frontend-Next.js%2014-black?style=for-the-badge)](https://nextjs.org)
 [![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)
 
-[Live Demo](#) • [Documentation](#how-it-works) • [Deployed Contracts](#-deployed-contracts)
+[Live Demo](https://chainmeet-beta.vercel.app/) • [Documentation](#how-it-works) • [Deployed Contracts](#-deployed-contracts)
 
 </div>
 
 ---
+
+live url - https://chainmeet-beta.vercel.app
 
 ## 🎯 What is ChainMeet?
 
