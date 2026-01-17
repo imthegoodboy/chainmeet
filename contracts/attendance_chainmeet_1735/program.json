@@ -1,0 +1,7 @@
+{
+  "program": "attendance_chainmeet_1735.aleo",
+  "version": "1.0.0",
+  "description": "ChainMeet Attendance Tracking",
+  "license": "MIT",
+  "dependencies": []
+}

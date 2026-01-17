@@ -1,0 +1,7 @@
+{
+  "program": "eligibility_chainmeet_8903.aleo",
+  "version": "1.0.0",
+  "description": "ChainMeet Eligibility Verification",
+  "license": "MIT",
+  "dependencies": []
+}

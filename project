@@ -1,0 +1,340 @@
+🔐 ChainMeet (Privacy-First Web3 Meetings) — FULL EXPLANATION
+1️⃣ USER POINT OF VIEW (MOST IMPORTANT FOR JUDGES)
+
+Think like a normal user, not a blockchain dev.
+
+👤 User Types
+1. Guest / Attendee
+
+Wants to join a private meeting
+
+Does NOT want to reveal:
+
+Name
+
+Wallet
+
+Company
+
+Identity
+
+2. Organizer / Host
+
+Creates meetings
+
+Sets rules (who can join)
+
+Wants proof, not identity
+
+🧑‍💻 USER FLOW (STEP BY STEP)
+🔹 Step 1: User opens ChainMeet
+
+Website looks like Zoom / Google Meet
+
+Button: “Join Meeting” or “Create Meeting”
+
+No login, no email.
+
+🔹 Step 2: Connect Aleo Wallet (Silently)
+
+User connects Aleo wallet
+
+Wallet address is never shown
+
+Used only to generate ZK proofs
+
+👉 Important:
+Wallet ≠ Identity
+
+🔹 Step 3: Join a Meeting (ZK Proof Flow)
+
+Meeting has rules like:
+
+“Must be DAO member”
+
+“Must hold NFT”
+
+“Must be verified developer”
+
+User clicks Join
+
+Behind the scenes:
+
+Wallet generates Zero-Knowledge Proof
+
+Proof says:
+
+“I satisfy the rule”
+
+Proof does NOT reveal:
+
+Wallet address
+
+Token balance
+
+NFT ID
+
+Aleo contract verifies proof → Access granted
+
+🔹 Step 4: Join Video Call (Anonymous)
+
+User enters meeting as:
+
+“Anonymous #42”
+
+Video / audio is off-chain
+
+Chat is encrypted
+
+🔹 Step 5: Attendance Proof Stored
+
+After meeting ends:
+
+Aleo stores private attendance record
+
+Later user can prove:
+
+“I attended 5 DAO meetings”
+
+Without revealing which ones.
+
+2️⃣ WHAT PROBLEM THIS SOLVES (CLEARLY)
+Traditional Meet	ChainMeet
+Email required	No email
+Identity visible	Anonymous
+Wallet exposed	Wallet hidden
+Attendance tracked publicly	Private ZK proof
+Centralized	Decentralized
+
+This is privacy by default, exactly Aleo’s vision.
+
+3️⃣ SYSTEM ARCHITECTURE (HIGH LEVEL)
+🏗️ Big Picture
+┌──────────────┐
+│   Frontend   │  (Next.js / React)
+│ (Web App UI) │
+└──────┬───────┘
+       │
+       │ ZK Proof Requests
+       ▼
+┌──────────────────────┐
+│   Aleo Programs      │
+│  (Leo Smart Contracts)│
+└──────┬───────────────┘
+       │
+       │ Verified Proofs
+       ▼
+┌──────────────────────┐
+│   Aleo Network       │
+│  (Private State)     │
+└──────────────────────┘
+
+Off-chain:
+- WebRTC / LiveKit (Video)
+- Encrypted Chat
+
+4️⃣ ALEO’S ROLE (THIS IS KEY FOR JUDGES)
+
+Aleo is NOT just storage here.
+
+Aleo handles:
+
+Privacy
+
+Verification
+
+Access control
+
+Proofs
+
+Off-chain handles:
+
+Video
+
+Audio
+
+UI
+
+5️⃣ SMART CONTRACT ARCHITECTURE (LEO PROGRAMS)
+
+You will NOT use one big contract.
+You split logic (judges like this).
+
+📦 1. meeting.leo
+
+Handles:
+
+Create meeting
+
+Meeting ID
+
+Rules
+
+Meeting {
+  meeting_id
+  organizer_hash
+  rule_hash
+}
+
+📦 2. eligibility.leo
+
+Handles:
+
+ZK proofs for joining
+
+Token/NFT/DAO membership checks
+
+Example:
+
+Prove ownership of NFT X
+Without revealing NFT ID
+
+📦 3. attendance.leo
+
+Handles:
+
+Private attendance records
+
+ZK aggregation
+
+Example:
+
+Prove attendance count ≥ 3
+
+6️⃣ DETAILED TECH FLOW (JOIN MEETING)
+🔁 What happens when user clicks “Join”
+
+Frontend asks:
+
+“Generate proof for rule X”
+
+Wallet:
+
+Runs Leo program locally
+
+Creates ZK proof
+
+Proof sent to:
+
+Aleo contract
+
+Aleo:
+
+Verifies proof
+
+Returns success/failure
+
+Frontend:
+
+If success → generate meeting access token
+
+Join video room
+
+No identity leak.
+No wallet leak.
+
+7️⃣ FRONTEND PAGES (VERY IMPORTANT)
+🧭 Page 1: Landing Page
+
+What is ChainMeet
+
+“Create Meeting”
+
+“Join Meeting”
+
+🧭 Page 2: Create Meeting
+
+Fields:
+
+Meeting name
+
+Description
+
+Privacy rule:
+
+DAO member
+
+NFT holder
+
+Custom rule
+
+Time & duration
+
+On submit:
+
+Calls meeting.leo
+
+🧭 Page 3: Join Meeting
+
+Enter meeting code
+
+Click “Generate Proof”
+
+Wallet popup (silent)
+
+Join anonymously
+
+🧭 Page 4: Meeting Room
+
+Video grid
+
+Anonymous usernames
+
+Encrypted chat
+
+Leave meeting
+
+🧭 Page 5: Profile (Private)
+
+Shows:
+
+Attendance count
+
+Proof badges (ZK)
+
+No public data
+
+8️⃣ PRIVACY MODEL (WRITE THIS IN SUBMISSION)
+Data	Stored Where	Visibility
+Wallet address	Never revealed	❌
+Identity	Not stored	❌
+Meeting rules	Aleo	✅
+Attendance	Aleo (private)	ZK only
+Video	Off-chain	Encrypted
+9️⃣ WHY THIS IS PERFECT FOR WAVEHACK
+
+Judges score:
+
+🥇 Privacy Usage (40%)
+
+ZK proofs
+
+Encrypted state
+
+Selective disclosure
+
+🥈 Technical (20%)
+
+Clean contract separation
+
+Off-chain + on-chain design
+
+🥉 UX (20%)
+
+Familiar UI
+
+No crypto friction
+
+🎯 Practical (10%)
+
+DAOs
+
+Hackathons
+
+Hiring
+
+Governance
+
+🔚 SUMMARY (ONE LINE FOR JUDGES)
+
+ChainMeet is a privacy-first meeting and networking platform where users prove eligibility with zero-knowledge proofs, not identity — powered by Aleo.

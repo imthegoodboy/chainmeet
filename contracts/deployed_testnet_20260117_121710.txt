@@ -1,0 +1,15 @@
+# ChainMeet Contract Deployment - Sat Jan 17 12:17:10 UTC 2026
+Network: testnet
+Endpoint: https://api.explorer.provable.com/v1
+
+## Program IDs (Add these to frontend/.env.local)
+
+NEXT_PUBLIC_MEETING_PROGRAM_ID=meeting_chainmeet_7879.aleo
+NEXT_PUBLIC_ELIGIBILITY_PROGRAM_ID=eligibility_chainmeet_8903.aleo
+NEXT_PUBLIC_ATTENDANCE_PROGRAM_ID=attendance_chainmeet_1735.aleo
+
+## Transaction IDs
+
+Meeting: 
+Eligibility: 
+Attendance: 

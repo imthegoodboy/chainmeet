@@ -1,0 +1,7 @@
+{
+  "program": "meeting.aleo",
+  "version": "1.0.0",
+  "description": "ChainMeet - Privacy-First Web3 Meetings",
+  "license": "MIT",
+  "dependencies": []
+}
