@@ -157,7 +157,7 @@ chainmeet/
    ```env
    # Aleo Network
    NEXT_PUBLIC_ALEO_NETWORK=testnet
-   NEXT_PUBLIC_ALEO_RPC_URL=https://api.explorer.provable.com/v1
+   NEXT_PUBLIC_ALEO_RPC_URL=https://api.explorer.provable.com/v2
    
    # Deployed Contract IDs
    NEXT_PUBLIC_MEETING_PROGRAM_ID=meeting_chainmeet_7879.aleo
@@ -229,7 +229,7 @@ leo build
 ```bash
 leo deploy --private-key $PRIVATE_KEY \
   --network testnet \
-  --endpoint https://api.explorer.provable.com/v1 \
+  --endpoint https://api.explorer.provable.com/v2 \
   --broadcast \
   --yes
 ```

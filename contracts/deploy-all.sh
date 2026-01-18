@@ -18,7 +18,7 @@ echo ""
 # Configuration
 PRIVATE_KEY="APrivateKey1zkpJxZnySB93VJjfRGVLiAhg9hwWUj5p31vScmwZXBqXgYX"
 NETWORK="testnet"
-ENDPOINT="https://api.explorer.provable.com/v1"
+ENDPOINT="https://api.explorer.provable.com/v2"
 BROADCAST="--broadcast"
 YES_FLAG="--yes"
 

@@ -160,7 +160,7 @@ Error: Please provide the `--endpoint` or set the `ENDPOINT` environment variabl
 ```bash
 leo deploy --private-key $PRIVATE_KEY \
   --network testnet \
-  --endpoint https://api.explorer.provable.com/v1 \
+  --endpoint https://api.explorer.provable.com/v2 \
   --broadcast \
   --yes
 ```
@@ -334,7 +334,7 @@ meetingProgramId: process.env.NEXT_PUBLIC_MEETING_PROGRAM_ID || "meeting_chainme
 rpcUrl: "https://api.explorer.aleo.org/v1"
 
 // ✅ CORRECT
-rpcUrl: "https://api.explorer.provable.com/v1"
+rpcUrl: "https://api.explorer.provable.com/v2"
 ```
 
 **Lesson:** Always sync frontend fallback values with actual deployed contract names. Don't use generic placeholders.
@@ -525,7 +525,7 @@ rpcUrl: "https://api.explorer.provable.com/v1"
 
 ✅ **DO:**
 - Match fallback program IDs with deployed contracts
-- Use correct RPC endpoint: `https://api.explorer.provable.com/v1`
+- Use correct RPC endpoint: `https://api.explorer.provable.com/v2`
 - Set `.env.local` with all program IDs
 - Keep `puzzle.ts` and `aleo.ts` program IDs consistent
 
@@ -574,7 +574,7 @@ rpcUrl: "https://api.explorer.provable.com/v1"
 - [ ] Check `window.aleo.puzzleWalletClient` (not just `window.aleo`)
 - [ ] Include all program IDs in wallet permissions
 - [ ] Match fallback program IDs with deployed contracts
-- [ ] Use correct RPC: `https://api.explorer.provable.com/v1`
+- [ ] Use correct RPC: `https://api.explorer.provable.com/v2`
 - [ ] Handle SDK response format correctly
 - [ ] Test wallet connection in browser with extension installed
 
@@ -634,6 +634,52 @@ const address = response?.connection?.address;
 
 ---
 
+### 13. ❌ Wrong Transaction Execution Method
+
+**Mistake:**
+- Used custom `signTransaction` and `sendTransaction` methods
+- These methods don't exist in Puzzle SDK v1.0.4
+- Tried to manually sign and broadcast transactions
+
+**Error:**
+```
+Failed to create meeting: Failed to sign transaction: Internal server error
+```
+
+**Root Cause:**
+- Puzzle SDK uses `requestCreateEvent` for executing transactions, not separate sign/send methods
+- The SDK handles signing internally through the wallet extension
+
+**Fix:**
+```typescript
+import { requestCreateEvent, EventType } from "@puzzlehq/sdk-core";
+
+// ✅ CORRECT - Use requestCreateEvent
+const response = await requestCreateEvent({
+  type: EventType.Execute,
+  programId: "meeting_chainmeet_7879.aleo",
+  functionId: "create_meeting",
+  fee: 500000, // in microcredits (0.5 credits)
+  inputs: ["input1", "input2", ...],
+  address: userAddress,
+  network: Network.AleoTestnet,
+});
+
+// Response contains eventId
+const eventId = response.eventId;
+```
+
+**Key Points:**
+- Use `requestCreateEvent` from `@puzzlehq/sdk-core` for all transactions
+- Set `type: EventType.Execute` for contract function calls
+- Fee is in microcredits (1 credit = 1,000,000 microcredits)
+- Inputs must be properly formatted for Leo (e.g., `123u64`, `addressfield`)
+- The SDK handles wallet popup, signing, and broadcasting internally
+
+**Lesson:** Always check SDK documentation for the correct transaction execution method. Don't assume standard sign/send patterns from other blockchains.
+
+---
+
 ## ✅ Success!
 
 All three contracts successfully deployed to Aleo Testnet:
@@ -642,3 +688,4 @@ All three contracts successfully deployed to Aleo Testnet:
 - ✅ `attendance_chainmeet_1735.aleo`
 
 Frontend wallet integration fixed! ✅
+Transaction execution using requestCreateEvent! ✅

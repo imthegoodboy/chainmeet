@@ -16,7 +16,7 @@ CONTRACT_DIR=$1
 # Configuration
 PRIVATE_KEY="APrivateKey1zkpJxZnySB93VJjfRGVLiAhg9hwWUj5p31vScmwZXBqXgYX"
 NETWORK="testnet"
-ENDPOINT="https://api.explorer.provable.com/v1"
+ENDPOINT="https://api.explorer.provable.com/v2"
 
 # Export environment variables
 export PRIVATE_KEY=$PRIVATE_KEY

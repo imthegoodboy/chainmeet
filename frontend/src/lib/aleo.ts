@@ -250,7 +250,7 @@ export class AleoService {
 // Default to deployed ChainMeet contracts on Aleo Testnet
 export const aleoService = new AleoService({
   network: (process.env.NEXT_PUBLIC_ALEO_NETWORK as "testnet" | "mainnet") || "testnet",
-  rpcUrl: process.env.NEXT_PUBLIC_ALEO_RPC_URL || "https://api.explorer.provable.com/v1",
+  rpcUrl: process.env.NEXT_PUBLIC_ALEO_RPC_URL || "https://api.explorer.provable.com/v2",
   meetingProgramId: process.env.NEXT_PUBLIC_MEETING_PROGRAM_ID || "meeting_chainmeet_7879.aleo",
   eligibilityProgramId: process.env.NEXT_PUBLIC_ELIGIBILITY_PROGRAM_ID || "eligibility_chainmeet_8903.aleo",
   attendanceProgramId: process.env.NEXT_PUBLIC_ATTENDANCE_PROGRAM_ID || "attendance_chainmeet_1735.aleo",
